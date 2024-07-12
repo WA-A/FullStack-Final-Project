@@ -1,22 +1,26 @@
-import mongoose, { Schema, model } from 'mongoose';
+import mongoose, { Types,Schema, model } from 'mongoose';
 
-const UserSchema = new Schema({
-    UserName:{
+const AdminSchema = new Schema({
+    SupervisorId:{
+    type:Types.ObjectId,
+       unique:true
+    },
+    SupervisorName:{
       type: String,
-       required:true,
        min:4,
        max:20
     },
-    Email:{
+    UniversityID:{
         type:String,
-        unique:true
-     },
-     Password:{
-        type:String,
-        required:true
+    },
+     Major:{
+      type:String,
      },
      PhoneNumber:{
       type:String
+     },
+     StudentCount:{
+        type:Number,
      },
      ConfirmEmail:{
         type:Boolean,
@@ -47,5 +51,5 @@ const UserSchema = new Schema({
 );
  
 
-const UserModel = model('User',UserSchema); 
-export default UserModel;
+const AdminModel = model('Admin',AdminSchema); 
+export default AdminModel;
