@@ -1,11 +1,18 @@
 import AdminModel from "../../Model/Admin.Model.js";
 
-
+let NumberOfGroups ;
 
 export const AddSupervisor = async (req,res)=>{
     const {SupervisorName,UniversityID,Major,PhoneNumber} = req.body;
      const supervisor = await AdminModel.create({SupervisorName,UniversityID,Major,PhoneNumber});
+     
+     if(NumberOfGroups>6){
+          return res.status(401).json({message:"Can't added "});
+
+     }
      return res.status(200).json({message:"success Add",supervisor});
+
+     
 }
 
 

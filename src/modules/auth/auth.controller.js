@@ -1,6 +1,6 @@
 import bcrypt from'bcryptjs';
 import jwt from 'jsonwebtoken';
-//import { customAlphabet, nanoid } from 'nanoid';
+import { customAlphabet, nanoid } from 'nanoid';
 import UserModel from '../../Model/User.Model.js';
 
 
@@ -47,11 +47,52 @@ export const SignIn = async (req,res)=>{
 
 }
 
+export const SendCode = async(req,res)=>{
+    const {Email} = req.body;
+    const Code = customAlphabet('1234567890abcdef', 4)();
+    const user = await UserModel.findOneAndUpdate({Email},{SendCode:Code},{new:true});
+
+    if(!user){
+        return res.status(400).json({message:" email not found"});
+    }
+    
+    //await SendEmail(Email,`Reset Password`,`<h2> code is ${code}</h2>`)
+    
+    return res.status(200).json({message:" success",user});
+
+     }
 
 
+     export const ForgotPassword = async(req,res)=>{
+        const {Email,Password,code} = req.body;
+        const user = await UserModel.findOne({Email});
+        if(!user){
+            return res.status(404).json({message:"user not found"});
 
+        }
 
+        if(user.SendCode != code){
+            return res.status(404).json({message:"invalid code"});
+        }
+
+        const password = bcrypt.hash(Password,parseInt(process.env.SALTROUND));
+
+        await user.save();
+
+        return res.status(200).json({message:" success"});
+
+         
+     }
      
+
+
+    //  export const ConfirmEmail = async(req,res)=>{
+    //     const token = req.params.token;
+    //     const decoded = jwt.verify(token,process.env.CONFIRM_EMAILTOKEN);
+    //     await UserModel.findOneAndUpdate({Email:decoded.Email},{ConfirmEmail:true});
+    //     return res.status(200).json({message:"success"});
+        
+    //     }
 
 
      
