@@ -25,7 +25,11 @@ export const DeleteGraduationProject = async (req,res)=>{
      return res.status(200).json({message:"success Delete"});
 }
 
-
+export const GetGraduationProject = async (req,res)=>{
+     const {ProjectType} = req.body;
+      const student = await StudentModel.findOne({ProjectType});
+      return res.status(200).json({message:"success Update",student});
+ }
 
 
 

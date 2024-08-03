@@ -32,7 +32,10 @@ export const DeleteSupervisor = async (req,res)=>{
      return res.status(200).json({message:"success Delete"});
 }
 
-
-
+export const GetSupervisor = async (req,res)=>{
+     const {SupervisorName} = req.body;
+      const student = await AdminModel.findOne({SupervisorName});
+      return res.status(200).json({message:"success get",student});
+ }
 
 

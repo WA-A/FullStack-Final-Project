@@ -10,6 +10,7 @@ const router = Router();
 router.post("/addsupervisor",auth(EndPoints.Createsupervisor),UserAdminController.AddSupervisor);
  router.patch("/updatesupervisor",auth(EndPoints.Createsupervisor),UserAdminController.UpdateSupervisor);
 router.delete("/deletesupervisor/:id",auth(EndPoints.Createsupervisor),UserAdminController.DeleteSupervisor);
+router.get("/getsupervisor",auth(EndPoints.Createsupervisor),UserAdminController.GetSupervisor);
 
 
 

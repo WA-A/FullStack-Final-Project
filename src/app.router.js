@@ -2,7 +2,7 @@ import connectDB from '../DB/ConnectDB.js';
 import AuthRouter from './modules/auth/auth.router.js';
 import UserStudentRouter from './modules/StudentUser/StudentUser.router.js';
 import UserAdminRouter from './modules/AdminUser/AdminUser.router.js';
-
+import DiscussionDates from "./modules/DiscussionDates/DiscussionDates.router.js"
 import cors from 'cors';
 
 
@@ -14,7 +14,7 @@ const Appinit = (app,express)=>{
     app.use('/userstudent',UserStudentRouter);
     app.use('/useradmin',UserAdminRouter);
     app.use('/auth',AuthRouter);
-    
+    app.use('/discussiondates',DiscussionDates);
     app.use('*',(req,res)=>{
         return res.status(404).json({message:"Page not Found"});
     });

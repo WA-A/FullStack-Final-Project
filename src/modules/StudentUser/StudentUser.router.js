@@ -7,6 +7,7 @@ import { EndPoints } from "./StudentUser.Role.js";
 router.post("/addgraduationproject",auth(EndPoints.CreateStudent),UserStudentController.AddGraduationProject);
 router.patch("/updategraduationproject",auth(EndPoints.CreateStudent),UserStudentController.UpdateGraduationProject);
 router.delete("/deletegraduationproject/:id",auth(EndPoints.CreateStudent),UserStudentController.DeleteGraduationProject);
+router.get("/getgraduationproject",auth(EndPoints.GetStudent),UserStudentController.GetGraduationProject);
 
 
 
